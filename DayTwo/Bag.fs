@@ -19,21 +19,21 @@ let parseBag (bagStr: string) =
         | _ -> 0
         
     { Blue = getColorValue "blue"; Green = getColorValue "green"; Red = getColorValue "red" }
-    // let sets = str.Trim().Split(";")
-    // let setList =
-    //     sets
-    //     |> Array.map (fun x ->
-    //         let values = x.Trim().Split(" ")
-    //         printfn "%A" values
-    //         let greenValue = if x.Contains "green" then Int32.Parse values[0] else 0
-    //         let redValue = Int32.Parse values[2]
-    //         let blueValue = Int32.Parse values[4]
-    //         let bag = { Green = greenValue; Blue = blueValue; Red = redValue }
-    //         bag
-    //         )
-    //     |> Array.toList
-    // setList
     
+    
+let getGamePower (bags: list<Bag>) =
+    let mutable rMax = 0
+    let mutable gMax = 0
+    let mutable bMax = 0
+    
+    bags
+    |> List.iter (fun x ->
+        rMax <- Math.Max(rMax, x.Red)
+        gMax <- Math.Max(gMax, x.Green)
+        bMax <- Math.Max(bMax, x.Blue)
+        )
+    let power = rMax * gMax * bMax
+    power
     
 let parseGame (line: string) =
     let gameInfo = line.Split([|':'|], StringSplitOptions.RemoveEmptyEntries)

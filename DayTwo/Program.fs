@@ -11,3 +11,12 @@ let resultPart1 =
     
     
 printfn "%A" resultPart1
+
+let resultPart2 =
+    readFile
+    |> Seq.map parseGame
+    |> Seq.map (fun x -> getGamePower x.Bags)
+    |> Seq.sum
+    
+    
+printfn "%A" resultPart2
